@@ -1,0 +1,6 @@
+0.0.0.0, http://web.pki-demo.info, https://web.pki-demo.info
+root /srv
+tls {
+    load /certs
+}
+markdown /

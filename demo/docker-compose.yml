@@ -1,0 +1,29 @@
+version: '2.0'
+services:
+  vault:
+    image: "vault:${VAULT_VERSION}"
+    ports:
+      - "8200:8200"
+    environment:
+      - VAULT_DEV_LISTEN_ADDRESS=${VAULT_DEV_LISTEN_ADDRESS}
+      - VAULT_DEV_ROOT_TOKEN_ID=${VAULT_TOKEN}
+    networks:
+      main:
+        aliases:
+          - vault.pki-demo.info
+
+  web:
+    build: ./web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./web/srv:/srv"
+      - "./certs:/certs"
+    networks:
+      main:
+        aliases:
+          - web.pki-demo.info
+networks:
+  main:
+
